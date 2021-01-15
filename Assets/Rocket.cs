@@ -6,10 +6,13 @@ using UnityEngine;
 public class Rocket : MonoBehaviour
 {
     Rigidbody rigidBody;
+    AudioSource boosterAudio;
+
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        boosterAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -20,9 +23,14 @@ public class Rocket : MonoBehaviour
 
     void ProcessInput()
     {
-        if(Input.GetKey(KeyCode.Space))//Can thrust while rotating
+        if (Input.GetKey(KeyCode.Space))//Can thrust while rotating
         {
             rigidBody.AddRelativeForce(Vector3.up);
+            if(!boosterAudio.isPlaying)
+            {
+                boosterAudio.Play();
+            }
+            
         }
 
         //Cannot rotate both ways at the same time
