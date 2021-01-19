@@ -7,6 +7,7 @@ public class Rocket : MonoBehaviour
 {
     Rigidbody rigidBody;
     AudioSource boosterAudio;
+    public int thrust = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -18,29 +19,38 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ProcessInput();
+        Thrust();
+        Rotate();
     }
 
-    void ProcessInput()
+    private void Thrust()
     {
         if (Input.GetKey(KeyCode.Space))//Can thrust while rotating
         {
-            rigidBody.AddRelativeForce(Vector3.up);
-            if(!boosterAudio.isPlaying)
+            rigidBody.AddRelativeForce(Vector3.up * thrust);
+
+            if (!boosterAudio.isPlaying)
             {
                 boosterAudio.Play();
             }
-            
         }
+        else
+        {
+            boosterAudio.Stop();
+        }
+    }
 
+    private void Rotate()
+    {
         //Cannot rotate both ways at the same time
-        if(Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
             transform.Rotate(Vector3.forward);
         }
-        else if(Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
             transform.Rotate(-(Vector3.forward));
         }
     }
+
 }

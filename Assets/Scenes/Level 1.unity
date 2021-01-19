@@ -128,6 +128,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1634338384, guid: 20037c8d2368526429b0898a50123c01, type: 3}
+      propertyPath: thrust
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634338385, guid: 20037c8d2368526429b0898a50123c01, type: 3}
+      propertyPath: m_Mass
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634338387, guid: 20037c8d2368526429b0898a50123c01, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634338387, guid: 20037c8d2368526429b0898a50123c01, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634338387, guid: 20037c8d2368526429b0898a50123c01, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634338387, guid: 20037c8d2368526429b0898a50123c01, type: 3}
+      propertyPath: Mute
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2454067093796861890, guid: 20037c8d2368526429b0898a50123c01,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -212,12 +236,12 @@ PrefabInstance:
     - target: {fileID: 211001706610433697, guid: b447bbbe5d7e9e74db712c6c86648315,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 3.28
       objectReference: {fileID: 0}
     - target: {fileID: 211001706610433697, guid: b447bbbe5d7e9e74db712c6c86648315,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20
+      value: -16.08
       objectReference: {fileID: 0}
     - target: {fileID: 211001706610433697, guid: b447bbbe5d7e9e74db712c6c86648315,
         type: 3}
