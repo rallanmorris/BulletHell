@@ -42,6 +42,8 @@ public class Rocket : MonoBehaviour
 
     private void Rotate()
     {
+        rigidBody.freezeRotation = true; //Ignore game physics while rotating
+
         //Cannot rotate both ways at the same time
         if (Input.GetKey(KeyCode.A))
         {
@@ -51,6 +53,8 @@ public class Rocket : MonoBehaviour
         {
             transform.Rotate(-(Vector3.forward));
         }
+
+        rigidBody.freezeRotation = false; //Resume Physics
     }
 
 }
