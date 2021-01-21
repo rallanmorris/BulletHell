@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
+    [SerializeField] float mainThrust = 50f;
+    [SerializeField] float rcsThrust = 100f;
+
     Rigidbody rigidBody;
     AudioSource boosterAudio;
-    public int thrust = 3;
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,11 +26,24 @@ public class Rocket : MonoBehaviour
         Rotate();
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        switch(collision.gameObject.tag)
+        {
+            case "Friendly":
+                print("okie dokie"); //todo replace
+                break;
+            default:
+                print("dead");
+                break;
+        }
+    }
+
     private void Thrust()
     {
         if (Input.GetKey(KeyCode.Space))//Can thrust while rotating
         {
-            rigidBody.AddRelativeForce(Vector3.up * thrust);
+            rigidBody.AddRelativeForce(Vector3.up * mainThrust);
 
             if (!boosterAudio.isPlaying)
             {
@@ -44,14 +60,15 @@ public class Rocket : MonoBehaviour
     {
         rigidBody.freezeRotation = true; //Ignore game physics while rotating
 
+        float rotationThisFrame = rcsThrust * Time.deltaTime;
         //Cannot rotate both ways at the same time
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Rotate(Vector3.forward);
+            transform.Rotate(Vector3.forward * rotationThisFrame);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(-(Vector3.forward));
+            transform.Rotate(-(Vector3.forward) * rotationThisFrame);
         }
 
         rigidBody.freezeRotation = false; //Resume Physics
