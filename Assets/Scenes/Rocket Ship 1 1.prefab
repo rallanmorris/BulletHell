@@ -161,8 +161,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e848e022a1d60447a5cc293358b5460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 50
-  rcsThrust: 100
+  mainThrust: 30
+  rcsThrust: 200
+  deathAudio: {fileID: 4889327130342385605, guid: ada76557f17ab1245a1b539316ea19da,
+    type: 3}
 --- !u!1 &2454067093944302389
 GameObject:
   m_ObjectHideFlags: 0
