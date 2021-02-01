@@ -3,8 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
 {
-    [SerializeField] float mainThrust = 50f;
-    [SerializeField] float rcsThrust = 100f;
+    [SerializeField] float mainThrust = 1000f;
+    [SerializeField] float rcsThrust = 200f;
+    [SerializeField] float loadLevelDelay = 1f;
     [SerializeField] AudioClip deathAudio;
     [SerializeField] AudioClip explodeAudio;
     [SerializeField] AudioClip thrustAudio;
@@ -64,7 +65,7 @@ public class Rocket : MonoBehaviour
             audioSource.Stop();
         }
         audioSource.PlayOneShot(deathAudio);
-        Invoke("ExplodeRocket", 2f);
+        Invoke("ExplodeRocket", 2.8f);
         Invoke("LoadFirstLevel", 3f);
     }
 
@@ -83,7 +84,7 @@ public class Rocket : MonoBehaviour
         state = State.Trancending;
         audioSource.PlayOneShot(newLevelSound);
         successParticles.Play();
-        Invoke("LoadNextLevel", 1f);
+        Invoke("LoadNextLevel", loadLevelDelay);
     }
 
     private void LoadFirstLevel()
@@ -111,7 +112,7 @@ public class Rocket : MonoBehaviour
 
     private void ApplyThrust()
     {
-        rigidBody.AddRelativeForce(Vector3.up * mainThrust);
+        rigidBody.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
 
         if (!audioSource.isPlaying)
         {
