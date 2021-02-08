@@ -22,6 +22,8 @@ public class Rocket : MonoBehaviour
     enum State {Alive, Dying, Trancending};
     State state = State.Alive;
 
+    bool collisionsDisabled = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,11 +39,29 @@ public class Rocket : MonoBehaviour
             RespondToThrustInput();
             RespondToRotateInput();
         }
+        if(Debug.isDebugBuild)
+        {
+            RespondToDebugKeys();
+        }
+
+    }
+
+    private void RespondToDebugKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            LoadNextLevel();
+        }
+        else if(Input.GetKeyDown(KeyCode.C))
+        {
+            //toggle collisons
+            collisionsDisabled = !collisionsDisabled;
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if(state != State.Alive) {return;}
+        if(state != State.Alive || collisionsDisabled) {return;}
 
         switch(collision.gameObject.tag)
         {
@@ -66,7 +86,7 @@ public class Rocket : MonoBehaviour
         }
         audioSource.PlayOneShot(deathAudio);
         Invoke("ExplodeRocket", 2.8f);
-        Invoke("LoadFirstLevel", 3f);
+        Invoke("LoadSameLevel", 3f);
     }
 
     private void ExplodeRocket()
@@ -92,9 +112,21 @@ public class Rocket : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    private void LoadSameLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     private void LoadNextLevel()
     {
-        SceneManager.LoadScene(1); //todo allow for more than 2 levels
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+        if (currentSceneIndex == SceneManager.sceneCountInBuildSettings -1)
+        {
+            nextSceneIndex = 0;
+        }
+
+        SceneManager.LoadScene(nextSceneIndex);
     }
 
     private void RespondToThrustInput()
